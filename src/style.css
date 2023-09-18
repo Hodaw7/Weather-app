@@ -85,3 +85,10 @@ p {
   border-radius: 5px;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
 }
+
+.credit {
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 15px;
+  opacity: 70%;
+}
