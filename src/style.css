@@ -1,0 +1,87 @@
+body {
+  font-family: "Montserrat", sans-serif;
+  text-align: center;
+}
+h1 {
+  font-size: 55px;
+}
+h2,
+h3 {
+  margin: 17px 0;
+}
+
+h3 {
+  margin-bottom: 10px;
+}
+
+h4 {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+form {
+  height: 40px;
+}
+.container {
+  margin: 100px auto;
+}
+
+.card {
+  width: 600px;
+  height: 600px;
+  padding: 30px 7px;
+  margin: 0 auto;
+}
+
+.btn-outline-info:hover {
+  color: #fff;
+}
+
+.form-control {
+  max-width: 57%;
+  display: inline;
+}
+
+.main {
+  margin: 45px 0;
+}
+
+.main img {
+  width: 50px;
+  margin-right: 10px;
+}
+
+p {
+  margin-top: 57px;
+}
+
+.elements {
+  margin: 30px;
+}
+
+.future {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.future-days {
+  margin: 5px 20px;
+  padding: 7px;
+}
+
+.future-days img {
+  display: block;
+  height: 50px;
+}
+
+.future-days:hover {
+  border: solid 1px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+}
