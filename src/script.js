@@ -1,4 +1,5 @@
-function formatDate(date) {
+function formatDate() {
+  let date = new Date();
   let hours = date.getHours();
   if (hours < 10) {
     hours = `0${hours}`;
@@ -38,7 +39,6 @@ function showTemp(response) {
   document.querySelector("#temp").innerHTML = Math.round(
     response.data.main.temp
   );
-
   document.querySelector("#description").innerHTML =
     response.data.weather[0].description;
 
@@ -49,6 +49,7 @@ function showTemp(response) {
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
   document.querySelector("#wind").innerHTML = response.data.wind.speed;
   document.querySelector("h1").innerHTML = response.data.name;
+  document.querySelector("#date").innerHTML = formatDate();
 }
 
 function getCurrentLoc() {
@@ -64,10 +65,6 @@ function getCurrentLoc() {
 
   navigator.geolocation.getCurrentPosition(getPosition);
 }
-
-let date = new Date();
-let time = document.querySelector("h3");
-time.innerHTML = formatDate(date);
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
