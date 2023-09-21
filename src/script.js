@@ -13,9 +13,8 @@ function searchCity(city) {
 
 function showTemp(response) {
   document.querySelector("h1").innerHTML = response.data.name;
-  document.querySelector("#temp").innerHTML = Math.round(
-    response.data.main.temp
-  );
+  celsiusTemp = response.data.main.temp;
+  tempElement.innerHTML = Math.round(celsiusTemp);
   let icon = document.querySelector("#icon");
   icon.setAttribute("alt", response.data.weather[0].description);
   if (response.data.weather[0].main === "Clear") {
@@ -84,10 +83,30 @@ function getCurrentLoc() {
   navigator.geolocation.getCurrentPosition(getPosition);
 }
 
+function showFahrenheit(event) {
+  event.preventDefault();
+  let fahrenheitTemp = (celsiusTemp * 9) / 5 + 32;
+  tempElement.innerHTML = Math.round(fahrenheitTemp);
+  fahrenheit.classList.add("active");
+}
+
+function showCelsius(event) {
+  event.preventDefault();
+}
+
+let tempElement = document.querySelector("#temp");
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
 
 let currentBtn = document.querySelector("#current");
 currentBtn.addEventListener("click", getCurrentLoc);
+
+let celsiusTemp = null;
+
+let fahrenheit = document.querySelector("#fahrenheit");
+fahrenheit.addEventListener("click", showFahrenheit);
+
+let celsius = document.querySelector("#celsius");
+celsius.addEventListener("click", showCelsius);
 
 searchCity("tehran");
