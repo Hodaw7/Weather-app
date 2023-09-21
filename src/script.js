@@ -1,3 +1,51 @@
+function handleSubmit(event) {
+  event.preventDefault();
+  let city = document.querySelector("#search-city").value;
+  searchCity(city);
+}
+
+function searchCity(city) {
+  let unit = "metric";
+  let apiKey = "6f578534f7bda58a70b66bd674c4d531";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${unit}`;
+  axios.get(apiUrl).then(showTemp);
+}
+
+function showTemp(response) {
+  document.querySelector("h1").innerHTML = response.data.name;
+  document.querySelector("#temp").innerHTML = Math.round(
+    response.data.main.temp
+  );
+  let icon = document.querySelector("#icon");
+  icon.setAttribute("alt", response.data.weather[0].description);
+  if (response.data.weather[0].main === "Clear") {
+    icon.setAttribute("src", "media/clear-day.png");
+  } else if (response.data.weather[0].main === "Clouds") {
+    icon.setAttribute("src", "media/clouds-day.png");
+  } else if (response.data.weather[0].main === "Snow") {
+    icon.setAttribute("src", "media/Snow.png");
+  } else if (
+    response.data.weather[0].main === "Rain" ||
+    response.data.weather[0].main === "Drizzle"
+  ) {
+    icon.setAttribute("src", "media/rain.png");
+  } else if (response.data.weather[0].main === "Thunderstorm") {
+    icon.setAttribute("src", "media/thunderstorm.png");
+  } else {
+    icon.setAttribute("src", "media/wind.png");
+  }
+  document.querySelector("#date").innerHTML = formatDate();
+  document.querySelector("#description").innerHTML =
+    response.data.weather[0].description;
+  document.querySelector("#pressure").innerHTML = Math.round(
+    response.data.main.pressure
+  );
+  document.querySelector("#humidity").innerHTML = response.data.main.humidity;
+  document.querySelector("#wind").innerHTML = Math.round(
+    response.data.wind.speed
+  );
+}
+
 function formatDate() {
   let date = new Date();
   let hours = date.getHours();
@@ -20,36 +68,6 @@ function formatDate() {
   let day = days[date.getDay()];
 
   return `${day} ${hours}:${minutes}`;
-}
-
-function handleSubmit(event) {
-  event.preventDefault();
-  let city = document.querySelector("#search-city").value;
-  searchCity(city);
-}
-
-function searchCity(city) {
-  let unit = "metric";
-  let apiKey = "6f578534f7bda58a70b66bd674c4d531";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${unit}`;
-  axios.get(apiUrl).then(showTemp);
-}
-
-function showTemp(response) {
-  document.querySelector("#temp").innerHTML = Math.round(
-    response.data.main.temp
-  );
-  document.querySelector("#description").innerHTML =
-    response.data.weather[0].description;
-
-  document.querySelector("#pressure").innerHTML = Math.round(
-    response.data.main.pressure
-  );
-
-  document.querySelector("#humidity").innerHTML = response.data.main.humidity;
-  document.querySelector("#wind").innerHTML = response.data.wind.speed;
-  document.querySelector("h1").innerHTML = response.data.name;
-  document.querySelector("#date").innerHTML = formatDate();
 }
 
 function getCurrentLoc() {
