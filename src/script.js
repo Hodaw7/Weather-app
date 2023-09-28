@@ -42,6 +42,14 @@ function showTemp(response) {
   document.querySelector("#wind").innerHTML = Math.round(
     response.data.wind.speed
   );
+
+  getForecast(response.data.coord);
+}
+
+function getForecast(coordinates) {
+  let apiKey = "1266ad07b66517497b1acf79ea5a6a64";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(showForecast);
 }
 
 function formatDate() {
@@ -73,9 +81,8 @@ function getCurrentLoc() {
     let latitude = position.coords.latitude;
     let longitude = position.coords.longitude;
     let apiKey = "6f578534f7bda58a70b66bd674c4d531";
-    let ApiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
-
-    axios.get(ApiUrl).then(showTemp);
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(showTemp);
   }
 
   navigator.geolocation.getCurrentPosition(getPosition);
@@ -96,7 +103,7 @@ function showCelsius(event) {
   celsius.classList.add("active");
 }
 
-function showForecast() {
+function showForecast(response) {
   let forecastElement = document.querySelector("#forecast");
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu"];
   let forecastHtml = `<div class="row forecast">`;
@@ -132,4 +139,3 @@ let celsius = document.querySelector("#celsius");
 celsius.addEventListener("click", showCelsius);
 
 searchCity("tehran");
-showForecast();
