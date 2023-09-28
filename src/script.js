@@ -96,6 +96,25 @@ function showCelsius(event) {
   celsius.classList.add("active");
 }
 
+function showForecast() {
+  let forecastElement = document.querySelector("#forecast");
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu"];
+  let forecastHtml = `<div class="row forecast">`;
+  days.forEach(function (day) {
+    forecastHtml =
+      forecastHtml +
+      ` <div class="forecast-days col-2">
+           <img src="media/clear-day.png" alt="icon" />
+            <div><strong>${day}</strong></div>
+            <span id="forecast-max">36°</span>
+           <span id="forecast-min">23°</span>
+        </div>
+                `;
+  });
+  forecastHtml = forecastHtml + `</div>`;
+  forecastElement.innerHTML = forecastHtml;
+}
+
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
 
@@ -113,3 +132,4 @@ let celsius = document.querySelector("#celsius");
 celsius.addEventListener("click", showCelsius);
 
 searchCity("tehran");
+showForecast();
