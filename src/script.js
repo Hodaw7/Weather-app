@@ -46,12 +46,6 @@ function showTemp(response) {
   getForecast(response.data.coord);
 }
 
-function getForecast(coordinates) {
-  let apiKey = "1266ad07b66517497b1acf79ea5a6a64";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(showForecast);
-}
-
 function formatDate() {
   let date = new Date();
   let hours = date.getHours();
@@ -103,23 +97,38 @@ function showCelsius(event) {
   celsius.classList.add("active");
 }
 
+function getForecast(coordinates) {
+  let apiKey = "1266ad07b66517497b1acf79ea5a6a64";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(showForecast);
+}
+
 function showForecast(response) {
+  let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
-  let days = ["Sun", "Mon", "Tue", "Wed", "Thu"];
   let forecastHtml = `<div class="row forecast">`;
-  days.forEach(function (day) {
-    forecastHtml =
-      forecastHtml +
-      ` <div class="forecast-days col-2">
-           <img src="media/clear-day.png" alt="icon" />
-            <div><strong>${day}</strong></div>
-            <span id="forecast-max">36°</span>
-           <span id="forecast-min">23°</span>
-        </div>
-                `;
+  forecast.forEach(function (days, index) {
+    if (index < 5) {
+      forecastHtml += `<div class="forecast-days col-2">
+           <img src="http://openweathermap.org/img/wn/${
+             days.weather[0].icon
+           }.png" alt="icon" />
+            <div class="day">${formatDay(days.dt)}</div>
+            <span id="forecast-max">${Math.round(days.temp.max)}°</span>
+           <span class="min" id="forecast-min">${Math.round(
+             days.temp.min
+           )}°</span>
+        </div>`;
+    }
   });
-  forecastHtml = forecastHtml + `</div>`;
+  forecastHtml += `</div>`;
   forecastElement.innerHTML = forecastHtml;
+}
+
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return days[date.getDay()];
 }
 
 let form = document.querySelector("#search-form");
