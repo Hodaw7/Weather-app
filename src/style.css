@@ -64,6 +64,10 @@ form {
   margin-right: 10px;
 }
 
+.temp {
+  font-size: 37px;
+}
+
 .degree {
   font-size: 25px;
 }
@@ -102,6 +106,10 @@ form {
 .day {
   font-weight: 800;
   margin-bottom: 5px;
+}
+
+.elements-number {
+  font-weight: 600;
 }
 
 .min {

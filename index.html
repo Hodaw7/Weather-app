@@ -38,7 +38,10 @@
         <div class="main">
           <h1>Tehran</h1>
           <h2>
-            <img src="" alt="icon" id="icon" /><span id="temp"></span>
+            <img src="" alt="icon" id="icon" /><span
+              class="temp"
+              id="temp"
+            ></span>
             <span class="degree">
               <a href="#" id="celsius">°C</a> |
               <a href="#" id="fahrenheit">°F</a>
@@ -47,9 +50,17 @@
           <h3 id="date"></h3>
           <h4 id="description"></h4>
           <p>
-            <span class="elements">Feels like: <span id="feels"></span>°</span
-            ><span class="elements">Humidity: <span id="humidity"></span>%</span
-            ><span class="elements">Wind: <span id="wind"></span> km/h</span>
+            <span class="elements"
+              >Feels like:
+              <span class="elements-number" id="feels"></span>°</span
+            >
+            <span class="elements"
+              >Humidity:
+              <span class="elements-number" id="humidity"></span>%</span
+            >
+            <span class="elements"
+              >Wind: <span class="elements-number" id="wind"></span> km/h</span
+            >
           </p>
         </div>
         <div id="forecast"></div>
