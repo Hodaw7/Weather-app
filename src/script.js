@@ -35,9 +35,10 @@ function showTemp(response) {
   document.querySelector("#date").innerHTML = formatDate();
   document.querySelector("#description").innerHTML =
     response.data.weather[0].description;
-  document.querySelector("#pressure").innerHTML = Math.round(
-    response.data.main.pressure
+  document.querySelector("#feels").innerHTML = Math.round(
+    response.data.main.feels_like
   );
+  feelsTemp = Math.round(response.data.main.feels_like);
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
   document.querySelector("#wind").innerHTML = Math.round(
     response.data.wind.speed
@@ -88,6 +89,9 @@ function showFahrenheit(event) {
   tempElement.innerHTML = Math.round(fahrenheitTemp);
   fahrenheit.classList.add("active");
   celsius.classList.remove("active");
+  let feelsElement = document.querySelector("#feels");
+  let feelsF = (feelsTemp * 9) / 5 + 32;
+  feelsElement.innerHTML = Math.round(feelsF);
 }
 
 function showCelsius(event) {
@@ -95,6 +99,8 @@ function showCelsius(event) {
   tempElement.innerHTML = Math.round(celsiusTemp);
   fahrenheit.classList.remove("active");
   celsius.classList.add("active");
+  let feelsElement = document.querySelector("#feels");
+  feelsElement.innerHTML = feelsTemp;
 }
 
 function getForecast(coordinates) {
@@ -140,6 +146,7 @@ currentBtn.addEventListener("click", getCurrentLoc);
 let tempElement = document.querySelector("#temp");
 
 let celsiusTemp = null;
+let feelsTemp = null;
 
 let fahrenheit = document.querySelector("#fahrenheit");
 fahrenheit.addEventListener("click", showFahrenheit);
